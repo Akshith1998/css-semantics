@@ -2,7 +2,7 @@ import "../styles/globals.scss";
 import { Providers } from "@/redux/provider";
 
 export const metadata = {
-  title: "CSS Semanatics",
+  title: "CSS Semantics",
   description: "To help generate the css",
 };
 
