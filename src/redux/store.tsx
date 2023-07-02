@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import rangeslideReducer from "@/components/rangeSliders/rangesliderSliceReducer";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    rangeslideReducer,
+  },
   devTools: process.env.NODE_ENV !== "production",
 });
 
