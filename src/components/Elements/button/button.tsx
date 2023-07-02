@@ -3,20 +3,29 @@
 import React, { useState } from "react";
 import styles from "./button.module.scss";
 import Slider from "@/components/rangeSliders/rangeSlider";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { getButtonText } from "./buttonSliceReducer";
 
 const Button = () => {
-  const [buttonInput, setButtonInput] = useState("Button");
-  const { padding, fontSize, borderRadius } = useAppSelector(
+  const { padding, fontSize, borderRadius, fontWeight } = useAppSelector(
     (state) => state.rangeslideReducer
   );
+  const { buttonText } = useAppSelector((state) => state.buttonSliceReducer);
+  const dispatch = useAppDispatch();
+
+  const handleButtonInput = (radius: string) => {
+    console.log(radius, buttonText);
+    dispatch(getButtonText(radius));
+  };
 
   const buttonHtml = `<button class="button">Button</button>`;
   const buttonCss = `.button{
-    "padding":${padding};
-    "font-size":${fontSize};
-    "border-radius":${borderRadius};
-    "border-style":"none";
+    padding: ${padding}px;
+    font-size: ${fontSize}px;
+    border-radius: ${borderRadius}px;
+    border-style: none;
+    cursor: pointer;
+    font-weight: ${fontWeight};
   }`;
   return (
     <div className={styles.container}>
@@ -28,35 +37,64 @@ const Button = () => {
               padding: padding,
               fontSize: fontSize,
               borderRadius: borderRadius,
+              fontWeight: fontWeight,
             }}
           >
-            Button
+            {buttonText}
           </button>
         </div>
         <div className={styles.leftContainerContent}>
           <div className={styles.leftContainerLeftView}>
             <div className={styles.Slider}>
               <div className={styles.SliderText}>Font size</div>
-              <Slider sliderName="fontSize" min={10} max={30} default={20} />
+              <Slider
+                sliderName="fontSize"
+                min={10}
+                max={30}
+                step={1}
+                default={20}
+              />
             </div>
             <div className={styles.Slider}>
               <div className={styles.SliderText}>Padding</div>
-              <Slider sliderName="padding" min={0} max={20} default={10} />
+              <Slider
+                sliderName="padding"
+                min={0}
+                max={20}
+                step={1}
+                default={10}
+              />
             </div>
             <div className={styles.Slider}>
               <div className={styles.SliderText}>Border radius</div>
-              <Slider sliderName="borderRadius" min={0} max={20} default={10} />
+              <Slider
+                sliderName="borderRadius"
+                min={0}
+                max={20}
+                step={1}
+                default={10}
+              />
             </div>
           </div>
           <div className={styles.leftContainerRightView}>
             <div className={styles.buttonInputDiv}>
               <div className={styles.buttonInputText}>Edit Text</div>
               <input
-                value={buttonInput}
+                value={buttonText}
                 onChange={({ target: { value: radius } }) => {
-                  setButtonInput(radius);
+                  handleButtonInput(radius);
                 }}
                 className={styles.buttonInput}
+              />
+            </div>
+            <div className={styles.Slider}>
+              <div className={styles.SliderText}>Font weight</div>
+              <Slider
+                sliderName="fontWeight"
+                min={100}
+                max={900}
+                step={100}
+                default={300}
               />
             </div>
           </div>

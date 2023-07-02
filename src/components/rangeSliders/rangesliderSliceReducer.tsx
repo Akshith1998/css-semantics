@@ -4,12 +4,14 @@ type sliceState = {
   padding: number;
   fontSize: number;
   borderRadius: number;
+  fontWeight: number;
 };
 
 const initialState = {
   padding: 10,
   fontSize: 20,
   borderRadius: 10,
+  fontWeight: 300,
 } as sliceState;
 
 const rangeSliderSlice = createSlice({
@@ -25,9 +27,12 @@ const rangeSliderSlice = createSlice({
     getBorderRadius: (state, action: PayloadAction<number>) => {
       state.borderRadius = action.payload;
     },
+    getFontWeight: (state, action: PayloadAction<number>) => {
+      state.fontWeight = action.payload;
+    },
   },
 });
 
-export const { getPadding, getFontSize, getBorderRadius } =
+export const { getPadding, getFontSize, getBorderRadius, getFontWeight } =
   rangeSliderSlice.actions;
 export default rangeSliderSlice.reducer;

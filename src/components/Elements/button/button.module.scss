@@ -13,6 +13,7 @@
         background-color: blue;
         color: #fff;
         border-style: none;
+        cursor: pointer;
       }
     }
     .leftContainerContent {
@@ -46,6 +47,17 @@
             font-family: Arial, Helvetica, sans-serif;
             font-size: 26px;
             font-weight: 700;
+          }
+        }
+        .Slider {
+          display: flex;
+          flex-direction: column;
+          margin: 5vh 0;
+          .SliderText {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            margin-right: 15px;
           }
         }
       }
